@@ -38,11 +38,28 @@ export function Question(props: QuestionProps): ReactElement {
       <MultipleContainers
         vertical
         minimal
+        items={{
+          answers: [],
+          choices: [
+            'せ',
+            'か',
+            'い',
+            'よ',
+            'わ',
+            'れ',
+            'に',
+            'し',
+            'た',
+            'が',
+            'え'
+          ]
+        }}
         columns={2}
         strategy={rectSortingStrategy}
         wrapperStyle={() => ({
-          width: 150,
-          height: 150,
+          border: '1px solid #ddd',
+          padding: '4px',
+          cursor: 'pointer',
         })}
       />
     </>
