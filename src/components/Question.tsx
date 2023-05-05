@@ -38,6 +38,7 @@ export function Question(props: QuestionProps): ReactElement {
       <MultipleContainers
         vertical
         minimal
+        containerClassName="min-w-full min-h-0 bg-slate-400 flex flex-wrap"
         items={{
           answers: [],
           choices: [

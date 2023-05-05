@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {createPortal, unstable_batchedUpdates} from 'react-dom';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal, unstable_batchedUpdates } from "react-dom";
 import {
   CancelDrop,
   closestCenter,
@@ -23,7 +23,7 @@ import {
   MeasuringStrategy,
   KeyboardCoordinateGetter,
   defaultDropAnimationSideEffects,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   AnimateLayoutChanges,
   SortableContext,
@@ -33,23 +33,24 @@ import {
   verticalListSortingStrategy,
   SortingStrategy,
   horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import {CSS} from '@dnd-kit/utilities';
-import {coordinateGetter as multipleContainersCoordinateGetter} from './multipleContainersKeyboardCoordinates';
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { coordinateGetter as multipleContainersCoordinateGetter } from "@/components/utilities/multipleContainersKeyboardCoordinates";
 
-import {Container, ContainerProps} from '@/components/Container';
-import {Item} from '@/components/Item';
+import { Container, ContainerProps } from "@/components/Container";
+import { Item } from "@/components/Item";
 
-import {createRange} from './utilities';
+import { createRange } from "./utilities";
 
-export default {
-  title: 'Presets/Sortable/Multiple Containers',
-};
+// export default {
+//   title: "Presets/Sortable/Multiple Containers",
+// };
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
-  defaultAnimateLayoutChanges({...args, wasDragging: true});
+  defaultAnimateLayoutChanges({ ...args, wasDragging: true });
 
 function DroppableContainer({
+  className,
   children,
   columns = 1,
   disabled,
@@ -58,6 +59,7 @@ function DroppableContainer({
   style,
   ...props
 }: ContainerProps & {
+  className?: string;
   disabled?: boolean;
   id: UniqueIdentifier;
   items: UniqueIdentifier[];
@@ -75,20 +77,20 @@ function DroppableContainer({
   } = useSortable({
     id,
     data: {
-      type: 'container',
+      type: "container",
       children: items,
     },
     animateLayoutChanges,
   });
   const isOverContainer = over
-    ? (id === over.id && active?.data.current?.type !== 'container') ||
+    ? (id === over.id && active?.data.current?.type !== "container") ||
       items.includes(over.id)
     : false;
 
   return (
     <Container
       ref={disabled ? undefined : setNodeRef}
-      className='w-full'
+      className={className}
       style={{
         ...style,
         transition,
@@ -112,7 +114,7 @@ const dropAnimation: DropAnimation = {
   sideEffects: defaultDropAnimationSideEffects({
     styles: {
       active: {
-        opacity: '0.5',
+        opacity: "0.5",
       },
     },
   }),
@@ -125,6 +127,8 @@ interface Props {
   cancelDrop?: CancelDrop;
   columns?: number;
   containerStyle?: React.CSSProperties;
+  containerClassName?: string;
+  itemClassName?: string;
   coordinateGetter?: KeyboardCoordinateGetter;
   getItemStyles?(args: {
     value: UniqueIdentifier;
@@ -135,7 +139,7 @@ interface Props {
     isSorting: boolean;
     isDragOverlay: boolean;
   }): React.CSSProperties;
-  wrapperStyle?(args: {index: number}): React.CSSProperties;
+  wrapperStyle?(args: { index: number }): React.CSSProperties;
   itemCount?: number;
   items?: Items;
   handle?: boolean;
@@ -148,8 +152,8 @@ interface Props {
   vertical?: boolean;
 }
 
-export const TRASH_ID = 'void';
-const PLACEHOLDER_ID = 'placeholder';
+export const TRASH_ID = "void";
+const PLACEHOLDER_ID = "placeholder";
 const empty: UniqueIdentifier[] = [];
 
 export function MultipleContainers({
@@ -160,6 +164,8 @@ export function MultipleContainers({
   handle = false,
   items: initialItems,
   containerStyle,
+  containerClassName,
+  itemClassName,
   coordinateGetter = multipleContainersCoordinateGetter,
   getItemStyles = () => ({}),
   wrapperStyle = () => ({}),
@@ -214,7 +220,7 @@ export function MultipleContainers({
           ? // If there are droppables intersecting with the pointer, return those
             pointerIntersections
           : rectIntersection(args);
-      let overId = getFirstCollision(intersections, 'id');
+      let overId = getFirstCollision(intersections, "id");
 
       if (overId != null) {
         if (overId === TRASH_ID) {
@@ -242,7 +248,7 @@ export function MultipleContainers({
 
         lastOverId.current = overId;
 
-        return [{id: overId}];
+        return [{ id: overId }];
       }
 
       // When a draggable item moves to a new container, the layout may shift
@@ -254,7 +260,7 @@ export function MultipleContainers({
       }
 
       // If no droppable is matched, return the last match
-      return lastOverId.current ? [{id: lastOverId.current}] : [];
+      return lastOverId.current ? [{ id: lastOverId.current }] : [];
     },
     [activeId, items]
   );
@@ -312,11 +318,11 @@ export function MultipleContainers({
           strategy: MeasuringStrategy.Always,
         },
       }}
-      onDragStart={({active}) => {
+      onDragStart={({ active }) => {
         setActiveId(active.id);
         setClonedItems(items);
       }}
-      onDragOver={({active, over}) => {
+      onDragOver={({ active, over }) => {
         const overId = over?.id;
 
         if (overId == null || overId === TRASH_ID || active.id in items) {
@@ -373,7 +379,7 @@ export function MultipleContainers({
           });
         }
       }}
-      onDragEnd={({active, over}) => {
+      onDragEnd={({ active, over }) => {
         if (active.id in items && over?.id) {
           setContainers((containers) => {
             const activeIndex = containers.indexOf(active.id);
@@ -451,10 +457,10 @@ export function MultipleContainers({
     >
       <div
         style={{
-          boxSizing: 'border-box',
+          boxSizing: "border-box",
           padding: 20,
-          display: 'flex',
-          flexDirection: vertical ? 'column' : 'row',
+          display: "flex",
+          flexDirection: vertical ? "column" : "row",
         }}
       >
         <SortableContext
@@ -469,6 +475,7 @@ export function MultipleContainers({
             <DroppableContainer
               key={containerId}
               id={containerId}
+              className={containerClassName}
               label={minimal ? undefined : `Column ${containerId}`}
               columns={columns}
               items={items[containerId]}
@@ -481,6 +488,7 @@ export function MultipleContainers({
                 {items[containerId].map((value, index) => {
                   return (
                     <SortableItem
+                      className={itemClassName}
                       disabled={isSortingContainer}
                       key={value}
                       id={value}
@@ -541,7 +549,7 @@ export function MultipleContainers({
           isDragOverlay: true,
         })}
         color={getColor(id)}
-        wrapperStyle={wrapperStyle({index: 0})}
+        wrapperStyle={wrapperStyle({ index: 0 })}
         renderItem={renderItem}
         dragOverlay
       />
@@ -554,7 +562,7 @@ export function MultipleContainers({
         label={`Column ${containerId}`}
         columns={columns}
         style={{
-          height: '100%',
+          height: "100%",
         }}
         shadow
         unstyled={false}
@@ -574,7 +582,7 @@ export function MultipleContainers({
               isDragOverlay: false,
             })}
             color={getColor(item)}
-            wrapperStyle={wrapperStyle({index})}
+            wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           />
         ))}
@@ -610,21 +618,21 @@ export function MultipleContainers({
 
 function getColor(id: UniqueIdentifier) {
   switch (String(id)[0]) {
-    case 'A':
-      return '#7193f1';
-    case 'B':
-      return '#ffda6c';
-    case 'C':
-      return '#00bcd4';
-    case 'D':
-      return '#ef769f';
+    case "A":
+      return "#7193f1";
+    case "B":
+      return "#ffda6c";
+    case "C":
+      return "#00bcd4";
+    case "D":
+      return "#ef769f";
   }
 
   return undefined;
 }
 
-function Trash({id}: {id: UniqueIdentifier}) {
-  const {setNodeRef, isOver} = useDroppable({
+function Trash({ id }: { id: UniqueIdentifier }) {
+  const { setNodeRef, isOver } = useDroppable({
     id,
   });
 
@@ -632,18 +640,18 @@ function Trash({id}: {id: UniqueIdentifier}) {
     <div
       ref={setNodeRef}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'fixed',
-        left: '50%',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "fixed",
+        left: "50%",
         marginLeft: -150,
         bottom: 20,
         width: 300,
         height: 60,
         borderRadius: 5,
-        border: '1px solid',
-        borderColor: isOver ? 'red' : '#DDD',
+        border: "1px solid",
+        borderColor: isOver ? "red" : "#DDD",
       }}
     >
       Drop here to delete
@@ -652,6 +660,7 @@ function Trash({id}: {id: UniqueIdentifier}) {
 }
 
 interface SortableItemProps {
+  className?: string;
   containerId: UniqueIdentifier;
   id: UniqueIdentifier;
   index: number;
@@ -660,10 +669,11 @@ interface SortableItemProps {
   style(args: any): React.CSSProperties;
   getIndex(id: UniqueIdentifier): number;
   renderItem(): React.ReactElement;
-  wrapperStyle({index}: {index: number}): React.CSSProperties;
+  wrapperStyle({ index }: { index: number }): React.CSSProperties;
 }
 
 function SortableItem({
+  className,
   disabled,
   id,
   index,
@@ -692,14 +702,15 @@ function SortableItem({
 
   return (
     <Item
+      className={className}
       ref={disabled ? undefined : setNodeRef}
       value={id}
       dragging={isDragging}
       sorting={isSorting}
       handle={handle}
-      handleProps={handle ? {ref: setActivatorNodeRef} : undefined}
+      handleProps={handle ? { ref: setActivatorNodeRef } : undefined}
       index={index}
-      wrapperStyle={wrapperStyle({index})}
+      wrapperStyle={wrapperStyle({ index })}
       style={style({
         index,
         value: id,

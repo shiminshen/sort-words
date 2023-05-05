@@ -6,5 +6,5 @@ export interface GameProps {
 }
 
 export function Game(props: GameProps): ReactElement {
-  return <></>
+  return <Question />
 }

@@ -58,7 +58,6 @@ export const Container = forwardRef<HTMLDivElement, Props>(
           } as React.CSSProperties
         }
         className={classNames(
-          className,
           styles.Container,
           unstyled && styles.unstyled,
           horizontal && styles.horizontal,
@@ -79,7 +78,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
             </div>
           </div>
         ) : null}
-        {placeholder ? children : <ul className='flex flex-wrap'>{children}</ul>}
+        {placeholder ? children : <ul className={className}>{children}</ul>}
       </Component>
     );
   }
