@@ -17,10 +17,11 @@ const MultipleContainers = dynamic(
 
 export interface QuestionProps {
   url?: string;
-  data?: QuestionData
+  data: QuestionData
 }
   
 export interface QuestionData {
+  url: string;
   answers: string[];
 }
 
