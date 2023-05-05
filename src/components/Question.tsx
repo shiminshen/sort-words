@@ -8,7 +8,7 @@ import {MultipleContainers} from "./MultipleContainers";
 import {rectSortingStrategy} from "@dnd-kit/sortable";
 
 export interface QuestionProps {
-  url: string;
+  url?: string;
 }
 
 export function Question(props: QuestionProps): ReactElement {
@@ -20,7 +20,7 @@ export function Question(props: QuestionProps): ReactElement {
     <>
       <ReactPlayer
         key={replayCount}
-        ref={playerRef}
+        ref={playerRef as any}
         url={url}
         config={{
           playerVars: {
