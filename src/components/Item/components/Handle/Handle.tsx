@@ -18,3 +18,5 @@ export const Handle = forwardRef<HTMLButtonElement, ActionProps>(
     );
   }
 );
+
+Handle.displayName = 'Handle';
