@@ -123,6 +123,7 @@ interface Props {
   cancelDrop?: CancelDrop;
   columns?: number;
   containerStyle?: React.CSSProperties;
+  className: string;
   containerClassName?: string;
   itemClassName?: string;
   coordinateGetter?: KeyboardCoordinateGetter;
@@ -160,6 +161,7 @@ export function MultipleContainers({
   handle = false,
   items: initialItems,
   containerStyle,
+  className,
   containerClassName,
   itemClassName,
   coordinateGetter = multipleContainersCoordinateGetter,
@@ -452,9 +454,8 @@ export function MultipleContainers({
       modifiers={modifiers}
     >
       <div
+      className={className}
         style={{
-          boxSizing: "border-box",
-          padding: 20,
           display: "flex",
           flexDirection: vertical ? "column" : "row",
         }}
