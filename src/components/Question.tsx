@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import type { ReactElement } from "react";
 // import ReactPlayer from 'react-player'
 import ReactPlayer from "react-player/youtube";
+import QuestionSettings from '@/components/QuestionSettings'
 
 import { rectSortingStrategy } from "@dnd-kit/sortable";
 const MultipleContainers = dynamic(
@@ -34,7 +35,7 @@ function shuffleStrings(arr: string[]): string[] {
 
 
 export function Question(props: QuestionProps): ReactElement {
-  const { url, data } = props;
+  const { data: { url, answers } } = props;
   const playerRef = createRef();
   const [replayCount, setReplayCount] = useState(0);
 
@@ -58,7 +59,7 @@ export function Question(props: QuestionProps): ReactElement {
           }}
         />
       </div>
-      <button onClick={() => setReplayCount(replayCount + 1)}>Replay</button>
+      <QuestionSettings />
       <MultipleContainers
         vertical
         minimal
@@ -66,19 +67,7 @@ export function Question(props: QuestionProps): ReactElement {
         containerClassName="w-full bg-slate-400 flex flex-wrap"
         items={{
           answers: [],
-          choices: [
-            "せ",
-            "か",
-            "い",
-            "よ",
-            "わ",
-            "れ",
-            "に",
-            "し",
-            "た",
-            "が",
-            "え",
-          ],
+          choices: answers,
         }}
         columns={2}
         strategy={rectSortingStrategy}

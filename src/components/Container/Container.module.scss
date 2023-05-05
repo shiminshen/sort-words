@@ -6,12 +6,15 @@
   box-sizing: border-box;
   appearance: none;
   outline: none;
-  margin: 10px;
   border-radius: 5px;
   transition: background-color 350ms ease;
   background-color: rgba(246, 246, 246, 1);
   border: 1px solid rgba(0, 0, 0, 0.05);
   font-size: 1em;
+
+  & + & {
+    margin-top: 20px;
+  }
 
   ul {
     display: flex;
