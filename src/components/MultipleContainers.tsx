@@ -127,6 +127,7 @@ interface Props {
   containerClassName?: string;
   itemClassName?: string;
   coordinateGetter?: KeyboardCoordinateGetter;
+  onChange?(items: Items): void;
   getItemStyles?(args: {
     value: UniqueIdentifier;
     index: number;
@@ -167,6 +168,7 @@ export function MultipleContainers({
   coordinateGetter = multipleContainersCoordinateGetter,
   getItemStyles = () => ({}),
   wrapperStyle = () => ({}),
+  onChange,
   minimal = false,
   modifiers,
   renderItem,
@@ -191,6 +193,14 @@ export function MultipleContainers({
   const lastOverId = useRef<UniqueIdentifier | null>(null);
   const recentlyMovedToNewContainer = useRef(false);
   const isSortingContainer = activeId ? containers.includes(activeId) : false;
+
+
+  // export items to parent component
+  useEffect(() => {
+    if (onChange) {
+      onChange(items);
+    }
+  }, [items]);
 
   /**
    * Custom collision detection strategy optimized for multiple containers

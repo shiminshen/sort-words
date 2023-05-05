@@ -16,10 +16,25 @@ const MultipleContainers = dynamic(
 
 export interface QuestionProps {
   url?: string;
+  data?: QuestionData
+}
+  
+export interface QuestionData {
+  answers: string[];
 }
 
+function shuffleStrings(arr: string[]): string[] {
+  const shuffledArr = [...arr]; // make a copy of the original array
+  for (let i = shuffledArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArr[i], shuffledArr[j]] = [shuffledArr[j], shuffledArr[i]]; // swap the elements
+  }
+  return shuffledArr;
+}
+
+
 export function Question(props: QuestionProps): ReactElement {
-  const { url = "https://youtu.be/Fw4wdaSszu0?start=747&end=750" } = props;
+  const { url, data } = props;
   const playerRef = createRef();
   const [replayCount, setReplayCount] = useState(0);
 
@@ -34,8 +49,6 @@ export function Question(props: QuestionProps): ReactElement {
           url={url}
           config={{
             playerVars: {
-              start: 747,
-              end: 750,
               autoplay: 1,
               controls: 0,
               showinfo: 0,
