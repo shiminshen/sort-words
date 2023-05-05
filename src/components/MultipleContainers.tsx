@@ -42,10 +42,6 @@ import { Item } from "@/components/Item";
 
 import { createRange } from "./utilities";
 
-// export default {
-//   title: "Presets/Sortable/Multiple Containers",
-// };
-
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
   defaultAnimateLayoutChanges({ ...args, wasDragging: true });
 
@@ -740,3 +736,5 @@ function useMountStatus() {
 
   return isMounted;
 }
+
+export default MultipleContainers;

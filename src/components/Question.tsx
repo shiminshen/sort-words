@@ -1,11 +1,16 @@
 "use client";
 
 import React, { useState, createRef } from "react";
+import dynamic from 'next/dynamic';
 import type { ReactElement } from "react";
 // import ReactPlayer from 'react-player'
 import ReactPlayer from "react-player/youtube";
-import {MultipleContainers} from "./MultipleContainers";
+
 import {rectSortingStrategy} from "@dnd-kit/sortable";
+const MultipleContainers  = dynamic(() => import('@/components/MultipleContainers'), {
+  ssr: false,
+});
+
 
 export interface QuestionProps {
   url?: string;

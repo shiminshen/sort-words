@@ -27,6 +27,7 @@ export interface Props {
   value: React.ReactNode;
   onRemove?(): void;
   renderItem?(args: {
+    className: string | undefined;
     dragOverlay: boolean;
     dragging: boolean;
     sorting: boolean;
