@@ -1,6 +1,6 @@
 "use client";
-
 import React, { useState, createRef } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import dynamic from "next/dynamic";
 import type { ReactElement } from "react";
 // import ReactPlayer from 'react-player'
@@ -22,10 +22,10 @@ export interface QuestionProps {
   
 export interface QuestionData {
   url: string;
-  answers: string[];
+  answers: string;
 }
 
-function shuffleStrings(arr: string[]): string[] {
+function shuffleArray<T>(arr: T[]): T[] {
   const shuffledArr = [...arr]; // make a copy of the original array
   for (let i = shuffledArr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -36,9 +36,14 @@ function shuffleStrings(arr: string[]): string[] {
 
 
 export function Question(props: QuestionProps): ReactElement {
-  const { data: { url, answers } } = props;
+  const { data: { url, answers }, handleAnswer } = props;
   const playerRef = createRef();
   const [replayCount, setReplayCount] = useState(0);
+
+  const choiceItems = answers.split('').map((choice) => ({
+    id: uuidv4(),
+    content: choice,
+  }));
 
   return (
     <>
@@ -48,6 +53,7 @@ export function Question(props: QuestionProps): ReactElement {
           height="100%"
           key={replayCount}
           ref={playerRef as any}
+          playing
           url={url}
           config={{
             playerVars: {
@@ -66,8 +72,9 @@ export function Question(props: QuestionProps): ReactElement {
         minimal
         className="w-full m-h-10"
         containerClassName="w-full bg-slate-400 flex flex-wrap"
+        onChange={handleAnswer}
         items={{
-          choices: shuffleStrings(answers),
+          choices: shuffleArray(choiceItems),
         }}
         columns={2}
         strategy={rectSortingStrategy}

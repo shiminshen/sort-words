@@ -3,7 +3,7 @@
 import React, {forwardRef} from 'react';
 import classNames from 'classnames';
 
-import {Handle, Remove} from '../Item';
+import {Handle, Remove} from '@/components/Item';
 
 import styles from './Container.module.scss';
 
