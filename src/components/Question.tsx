@@ -67,8 +67,7 @@ export function Question(props: QuestionProps): ReactElement {
         className="w-full m-h-10"
         containerClassName="w-full bg-slate-400 flex flex-wrap"
         items={{
-          answers: [],
-          choices: answers,
+          choices: shuffleStrings(answers),
         }}
         columns={2}
         strategy={rectSortingStrategy}
