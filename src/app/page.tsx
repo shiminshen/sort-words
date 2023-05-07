@@ -1,15 +1,19 @@
 // import Image from "next/image";
 import { Inter } from "next/font/google";
 
-import {Game} from "@/components/Game";
+import { Game } from "@/components/Game";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center p-6">
-      <Game />
-    </main>
+    <>
+      <Navbar />
+      <main className="flex h-screen flex-col items-center p-6">
+        <Game />
+      </main>
+    </>
   );
   // return (
   //   <main className="flex min-h-screen flex-col items-center justify-between p-24">

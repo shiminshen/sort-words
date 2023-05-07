@@ -697,6 +697,7 @@ interface SortableItemProps {
   index: number;
   handle: boolean;
   disabled?: boolean;
+  value: React.ReactNode;
   style(args: any): React.CSSProperties;
   getIndex(id: UniqueIdentifier): number;
   renderItem(): React.ReactElement;

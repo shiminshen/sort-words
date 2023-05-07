@@ -18,11 +18,12 @@ const MultipleContainers = dynamic(
 export interface QuestionProps {
   url?: string;
   data: QuestionData
+  handleAnswer: (items: any) => void;
 }
   
 export interface QuestionData {
   url: string;
-  answers: string;
+  answers: string[];
 }
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -36,18 +37,19 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 
 export function Question(props: QuestionProps): ReactElement {
+  console.log(props)
   const { data: { url, answers }, handleAnswer } = props;
   const playerRef = createRef();
   const [replayCount, setReplayCount] = useState(0);
-
-  const choiceItems = answers.split('').map((choice) => ({
+  
+  const choiceItems = answers?.map((choice) => ({
     id: uuidv4(),
     content: choice,
   }));
 
   return (
     <>
-      <div className="w-full aspect-video">
+      <div className="w-full m-h-50 aspect-video">
         <ReactPlayer
           width="100%"
           height="100%"

@@ -1,4 +1,4 @@
-const japaneseHiragana = {
+export const japaneseHiragana = {
   "あ": "a",
   "い": "i",
   "う": "u",
