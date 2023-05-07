@@ -91,7 +91,6 @@ export const Item = React.memo(
     ) => {
       // get show hint from game setting context
       const { showHints } = useGameSettings();
-      console.log(showHints);
       useEffect(() => {
         if (!dragOverlay) {
           return;
@@ -184,7 +183,7 @@ export const Item = React.memo(
             >
               {value}
               {showHints && hints && (
-                <Box fontSize={'small'}>{hints}</Box>
+                <Box fontSize={10}>{hints}</Box>
               )}
             </Flex>
             <span className={styles.Actions}>

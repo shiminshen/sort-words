@@ -11,16 +11,12 @@ export interface GameProps {}
 
 const questions = [
   {
-    url: "https://youtu.be/aZuiL-lgrTw?start=19&end=21",
-    answers: ["お", "は", "よ", "う", "ご", "ざ", "い", "ま", "す"],
-  },
-  {
     url: "https://youtu.be/nAx5mdVPl_g?t=2",
     answers: ["わ", "く", "わ", "く"],
   },
   {
-    url: "https://youtu.be/aZuiL-lgrTw?start=91&end=93",
-    answers: ["こ", "ろ", "し", "や"],
+    url: "https://youtu.be/tknn02o0B5o?start=89&end=92",
+    answers: ["う", "ま", "い"],
   },
   {
     url: "https://youtu.be/aZuiL-lgrTw?start=91&end=93",
@@ -31,8 +27,8 @@ const questions = [
     answers: ["アーニャ", "これ", "すき"],
   },
   {
-    url: "https://youtu.be/tknn02o0B5o?start=89&end=92",
-    answers: ["う", "ま", "い"],
+    url: "https://youtu.be/aZuiL-lgrTw?start=19&end=21",
+    answers: ["お", "は", "よ", "う", "ご", "ざ", "い", "ま", "す"],
   },
   {
     url: "https://youtu.be/Fw4wdaSszu0?start=747&end=750",

@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Navbar />
       <main className="flex h-screen flex-col items-center p-6">
-        <Game />
+          <Game />
       </main>
     </>
   );
