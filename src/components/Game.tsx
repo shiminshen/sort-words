@@ -57,7 +57,7 @@ export function Game(props: GameProps): ReactElement {
   const handleAnswer = (items: any) => {
     const { choices } = items;
 
-    const currentAnswer = choices.map((I) => I.content).join("");
+    const currentAnswer = choices.map((I: any) => I.content).join("");
     const correctAnswer = question.answers.join("");
     console.log(currentAnswer);
 

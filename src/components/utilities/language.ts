@@ -1,4 +1,7 @@
-export const japaneseHiragana = {
+interface Language {
+  [key: string]: string;
+}
+export const japaneseHiragana: Language = {
   "あ": "a",
   "い": "i",
   "う": "u",

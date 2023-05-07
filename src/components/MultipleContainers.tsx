@@ -58,7 +58,7 @@ function DroppableContainer({
   className?: string;
   disabled?: boolean;
   id: UniqueIdentifier;
-  items: UniqueIdentifier[];
+  items: Item[];
   style?: React.CSSProperties;
 }) {
   const {
@@ -80,7 +80,7 @@ function DroppableContainer({
   });
   const isOverContainer = over
     ? (id === over.id && active?.data.current?.type !== "container") ||
-      items.includes(over.id)
+      !!items.find((I) => I.id === over.id)
     : false;
 
   return (
@@ -116,7 +116,12 @@ const dropAnimation: DropAnimation = {
   }),
 };
 
-type Items = Record<UniqueIdentifier, UniqueIdentifier[]>;
+type Item = {
+  id: UniqueIdentifier;
+  content: string;
+};
+
+type Items = Record<UniqueIdentifier, Item[]>;
 
 interface Props {
   adjustScale?: boolean;
@@ -152,7 +157,7 @@ interface Props {
 
 export const TRASH_ID = "void";
 const PLACEHOLDER_ID = "placeholder";
-const empty: UniqueIdentifier[] = [];
+const empty: Item[] = [];
 
 export function MultipleContainers({
   adjustScale = false,
@@ -187,10 +192,10 @@ export function MultipleContainers({
       }
   );
 
-  const [allItems, setAllItems] = useState<UniqueIdentifier[]>(() =>
+  const [allItems, setAllItems] = useState<Item[]>(() =>
     Object.keys(items).reduce(
       (acc, key) => [...acc, ...items[key]],
-      [] as UniqueIdentifier[]
+      [] as Item[]
     )
   );
 
@@ -362,8 +367,10 @@ export function MultipleContainers({
           setItems((items) => {
             const activeItems = items[activeContainer];
             const overItems = items[overContainer];
-            const overIndex = overItems.indexOf(overId);
-            const activeIndex = activeItems.indexOf(active.id);
+            const overIndex = overItems.findIndex((I) => I.id === overId);
+            const activeIndex = activeItems.findIndex(
+              (I) => I.id === active.id
+            );
 
             let newIndex: number;
 
@@ -387,7 +394,7 @@ export function MultipleContainers({
             return {
               ...items,
               [activeContainer]: items[activeContainer].filter(
-                (item) => item !== active.id
+                (item) => item.id !== active.id
               ),
               [overContainer]: [
                 ...items[overContainer].slice(0, newIndex),
@@ -442,13 +449,14 @@ export function MultipleContainers({
 
           unstable_batchedUpdates(() => {
             setContainers((containers) => [...containers, newContainerId]);
+            const activeItem = items[activeContainer].find((I) => I.id === activeId)
             setItems((items) => ({
               ...items,
               [activeContainer]: items[activeContainer].filter(
                 // (id) => id !== activeId
                 (item) => item.id !== activeId
               ),
-              [newContainerId]: [active.id],
+              [newContainerId]: activeItem ? [activeItem] : [],
             }));
             setActiveId(null);
           });
@@ -600,19 +608,19 @@ export function MultipleContainers({
       >
         {items[containerId].map((item, index) => (
           <Item
-            key={item}
+            key={item.id}
             value={item.content}
             handle={handle}
             style={getItemStyles({
               containerId,
               overIndex: -1,
-              index: getIndex(item),
-              value: item,
+              index: getIndex(item.id),
+              value: item.id,
               isDragging: false,
               isSorting: false,
               isDragOverlay: false,
             })}
-            color={getColor(item)}
+            color={getColor(item.id)}
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           />
@@ -647,6 +655,7 @@ export function MultipleContainers({
   }
 }
 
+// FIXME remove
 function getColor(id: UniqueIdentifier) {
   switch (String(id)[0]) {
     case "A":
