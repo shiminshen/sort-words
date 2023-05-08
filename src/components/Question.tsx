@@ -46,7 +46,7 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 export function Question(props: QuestionProps): ReactElement {
   const { data: { url, answers }, handleAnswer } = props;
-  const playerRef = createRef();
+  const playerRef = createRef<any>();
   const [replayCount, setReplayCount] = useState(0);
   const { autoReplay } = useGameSettings();
   
@@ -57,11 +57,10 @@ export function Question(props: QuestionProps): ReactElement {
 
   // FIXME
   // use regex to parse query string from url
-  const queryString = url?.match(/\?(.*)/)?.[1];
+  const queryString = url?.match(/\?(.*)/)?.[1] || '';
   const urlParams = qs.parse(queryString, { ignoreQueryPrefix: true });
   const replay = () => {
     // seek player to beginning
-    console.log(urlParams)
     playerRef?.current?.seekTo(urlParams?.start || urlParams?.t || 0);
   }
 
