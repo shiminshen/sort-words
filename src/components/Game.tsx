@@ -19,12 +19,12 @@ const questions = [
     answers: ["う", "ま", "い"],
   },
   {
-    url: "https://youtu.be/aZuiL-lgrTw?start=91&end=93",
-    answers: ["む", "ず", "か", "し", "い", "よ"],
-  },
-  {
     url: "https://youtu.be/aZuiL-lgrTw?start=62&end=64",
     answers: ["アーニャ", "これ", "すき"],
+  },
+  {
+    url: "https://youtu.be/aZuiL-lgrTw?start=91&end=93",
+    answers: ["む", "ず", "か", "し", "い", "よ"],
   },
   {
     url: "https://youtu.be/aZuiL-lgrTw?start=19&end=21",

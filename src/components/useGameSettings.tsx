@@ -6,14 +6,14 @@ import type { ReactNode, SetStateAction, Dispatch } from 'react';
 // autoReplay: automatically replay the game when it ends
 // showHints: show the hints for the game
 const GameSettingsContext = createContext({
-  autoReplay: false,
+  autoReplay: true,
   setAutoReplay: (() => {}) as Dispatch<SetStateAction<boolean>>,
   showHints: false,
   setShowHints: (() => {}) as Dispatch<SetStateAction<boolean>>,
 });
 
 export const GameSettingsProvider = ({ children }: { children: ReactNode }) => {
-  const [autoReplay, setAutoReplay] = useState(false);
+  const [autoReplay, setAutoReplay] = useState(true);
   const [showHints, setShowHints] = useState(false);
   
   return (
