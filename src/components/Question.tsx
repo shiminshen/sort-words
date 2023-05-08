@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, createRef } from "react";
+import qs from 'qs'
 import { v4 as uuidv4 } from 'uuid';
 import dynamic from "next/dynamic";
 import type { ReactElement } from "react";
@@ -54,8 +55,14 @@ export function Question(props: QuestionProps): ReactElement {
     content: choice,
   }));
 
+  // FIXME
+  // use regex to parse query string from url
+  const queryString = url?.match(/\?(.*)/)?.[1];
+  const urlParams = qs.parse(queryString, { ignoreQueryPrefix: true });
   const replay = () => {
-    setReplayCount(replayCount + 1);
+    // seek player to beginning
+    console.log(urlParams)
+    playerRef?.current?.seekTo(urlParams?.start || urlParams?.t || 0);
   }
 
   return (
