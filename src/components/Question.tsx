@@ -90,6 +90,7 @@ export function Question(props: QuestionProps): ReactElement {
       <MultipleContainers
         vertical
         minimal
+        itemClassName="m-1"
         className="w-full m-h-10"
         containerClassName="w-full bg-slate-400 flex flex-wrap"
         onChange={handleAnswer}
@@ -98,11 +99,7 @@ export function Question(props: QuestionProps): ReactElement {
         }}
         columns={2}
         strategy={rectSortingStrategy}
-        wrapperStyle={() => ({
-          border: "1px solid #ddd",
-          padding: "4px",
-          cursor: "pointer",
-        })}
+        wrapperStyle={() => ({})}
       />
     </>
   );
