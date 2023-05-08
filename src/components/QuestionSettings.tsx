@@ -3,9 +3,14 @@ import { FormControl, FormLabel, SimpleGrid, Switch } from "@chakra-ui/react";
 
 import { useGameSettings } from "@/components/useGameSettings";
 
-export interface QuestionSettingsProps {}
+import { Box, Flex, Button } from "@chakra-ui/react";
+
+export interface QuestionSettingsProps {
+  replay: () => void;
+}
 
 export function QuestionSettings(props: QuestionSettingsProps): ReactElement {
+  const { replay } = props;
   const { autoReplay, setAutoReplay, showHints, setShowHints } =
     useGameSettings();
   return (
@@ -23,6 +28,9 @@ export function QuestionSettings(props: QuestionSettingsProps): ReactElement {
         defaultChecked={autoReplay}
         onChange={(e) => setAutoReplay(e.target.checked)}
       />
+      <Button colorScheme="teal" variant="solid" onClick={replay}>
+        replay
+      </Button>
     </FormControl>
   );
 }

@@ -7,7 +7,14 @@ import type { ReactElement } from "react";
 import ReactPlayer from "react-player/youtube";
 import QuestionSettings from '@/components/QuestionSettings'
 
+import { useGameSettings } from "@/components/useGameSettings";
+
 import { rectSortingStrategy } from "@dnd-kit/sortable";
+
+import {
+  Box,
+} from "@chakra-ui/react";
+
 const MultipleContainers = dynamic(
   () => import("@/components/MultipleContainers"),
   {
@@ -37,15 +44,19 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 
 export function Question(props: QuestionProps): ReactElement {
-  console.log(props)
   const { data: { url, answers }, handleAnswer } = props;
   const playerRef = createRef();
   const [replayCount, setReplayCount] = useState(0);
+  const { autoReplay } = useGameSettings();
   
   const choiceItems = answers?.map((choice) => ({
     id: uuidv4(),
     content: choice,
   }));
+
+  const replay = () => {
+    setReplayCount(replayCount + 1);
+  }
 
   return (
     <>
@@ -57,6 +68,11 @@ export function Question(props: QuestionProps): ReactElement {
           ref={playerRef as any}
           playing
           url={url}
+          onEnded={() => {
+            if (autoReplay) {
+              replay();
+            }
+          }}
           config={{
             playerVars: {
               autoplay: 1,
@@ -68,7 +84,9 @@ export function Question(props: QuestionProps): ReactElement {
           }}
         />
       </div>
-      <QuestionSettings />
+      <Box my={2} width={'full'}>
+        <QuestionSettings replay={replay} />
+      </Box>
       <MultipleContainers
         vertical
         minimal
