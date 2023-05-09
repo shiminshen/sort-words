@@ -59,7 +59,6 @@ export function Game(props: GameProps): ReactElement {
 
     const currentAnswer = choices.map((I: any) => I.content).join("");
     const correctAnswer = question.answers.join("");
-    console.log(currentAnswer);
 
     if (currentAnswer === correctAnswer) {
       toast({
