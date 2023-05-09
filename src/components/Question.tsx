@@ -93,6 +93,7 @@ export function Question(props: QuestionProps): ReactElement {
       <Box my={2} width={'full'}>
         <QuestionSettings replay={replay} />
       </Box>
+      <h2>Place answers in the correct order.</h2>
       <MultipleContainers
         vertical
         minimal
