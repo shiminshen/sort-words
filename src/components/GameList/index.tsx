@@ -75,7 +75,6 @@ export function GameList(props: indexProps): ReactElement {
           title={game.title}
           language={game.language}
           type={game.type}
-          questions={game.questions}
         />
       ))}
     </Box>
