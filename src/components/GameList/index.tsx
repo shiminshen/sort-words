@@ -3,7 +3,7 @@
 import type { ReactElement } from "react"
 
 import { GameCard } from '@/components/GameList/GameCard'
-import { Box } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 
 const questions = [
   {
@@ -67,7 +67,7 @@ export interface indexProps {
 
 export function GameList(props: indexProps): ReactElement {
   return (
-    <Box>
+    <Flex>
       {gameData.map((game) => (
         <GameCard
           key={game.title}
@@ -77,6 +77,6 @@ export function GameList(props: indexProps): ReactElement {
           type={game.type}
         />
       ))}
-    </Box>
+    </Flex>
   )
 }

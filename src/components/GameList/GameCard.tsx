@@ -16,7 +16,7 @@ export function GameCard(props: GameCardProps): ReactElement {
   const { id, title, language, type } = props;
   return (
     <Link href={`/game/${id}`}>
-      <Card>
+      <Card mr={2}>
         <CardHeader>
           <Text>{title}</Text>
         </CardHeader>
