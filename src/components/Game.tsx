@@ -1,13 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import type { ReactElement } from "react";
 import Question from "@/components/Question";
 import { useToast } from "@chakra-ui/react";
+import { fetchGame } from '@/api/game'
 
 import { GameSettingsProvider } from "@/components/useGameSettings";
 
-export interface GameProps {}
+export interface GameProps {
+  id: string;
+}
 
 const questions = [
   {
@@ -49,9 +53,18 @@ const questions = [
 ];
 
 export function Game(props: GameProps): ReactElement {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['game'],
+    queryFn: () => fetchGame(props.id),
+  })
+    console.log(data)
   const [questionIndex, setQuestionIndex] = useState(0);
-  const question = questions[questionIndex];
+  const question = data?.questions?.[questionIndex]
   const toast = useToast();
+
+  if (!question) {
+    return <></>
+  }
 
   // const [showNextButton, setShowNextButton] = useState(false);
   const handleAnswer = (items: any) => {

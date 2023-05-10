@@ -58,7 +58,7 @@ export function Question(props: QuestionProps): ReactElement {
   // FIXME
   // use regex to parse query string from url
   const queryString = url?.match(/\?(.*)/)?.[1] || '';
-  const urlParams = qs.parse(queryString, { ignoreQueryPrefix: true });
+  const urlParams = qs.parse(queryString);
   const replay = () => {
     // seek player to beginning
     playerRef?.current?.seekTo(urlParams?.start || urlParams?.t || 0);
