@@ -39,6 +39,7 @@ export const questions = [
 
 
 export const gameData = [
+  {},
   {
     id: "1",
     title: "阿尼亞 Quiz",
