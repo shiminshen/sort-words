@@ -8,12 +8,12 @@ export const questions = [
     answers: ["ぼく", "さいきょう", "だから"],
   },
   {
-    url: "https://youtu.be/nAx5mdVPl_g?t=2",
-    answers: ["わ", "く", "わ", "く"],
-  },
-  {
     url: "https://youtu.be/tknn02o0B5o?start=89&end=92",
     answers: ["う", "ま", "い"],
+  },
+  {
+    url: "https://youtu.be/nAx5mdVPl_g?t=2",
+    answers: ["わ", "く", "わ", "く"],
   },
   {
     url: "https://youtu.be/aZuiL-lgrTw?start=62&end=64",
@@ -39,10 +39,9 @@ export const questions = [
 
 
 export const gameData = [
-  {},
   {
     id: "1",
-    title: "阿尼亞 Quiz",
+    title: "Gojo Quiz",
     language: "Japanese",
     type: "Listening",
     level: 1,
@@ -50,7 +49,7 @@ export const gameData = [
   },
   {
     id: "2",
-    title: "Gojo Quiz",
+    title: "阿尼亞 Quiz",
     language: "Japanese",
     type: "Listening",
     level: 1,

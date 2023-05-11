@@ -5,5 +5,5 @@ export const fetchGames = () => {
 }
 
 export const fetchGame = (gameId) => {
-  return gameData[gameId]
+  return gameData[Number(gameId) - 1]
 }
