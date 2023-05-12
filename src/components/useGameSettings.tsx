@@ -8,13 +8,13 @@ import type { ReactNode, SetStateAction, Dispatch } from 'react';
 const GameSettingsContext = createContext({
   autoReplay: false,
   setAutoReplay: (() => {}) as Dispatch<SetStateAction<boolean>>,
-  showHints: false,
+  showHints: true,
   setShowHints: (() => {}) as Dispatch<SetStateAction<boolean>>,
 });
 
 export const GameSettingsProvider = ({ children }: { children: ReactNode }) => {
   const [autoReplay, setAutoReplay] = useState(false);
-  const [showHints, setShowHints] = useState(false);
+  const [showHints, setShowHints] = useState(true);
   
   return (
     <GameSettingsContext.Provider value={{
