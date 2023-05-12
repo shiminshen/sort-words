@@ -33,15 +33,9 @@ export function GameCard(props: GameCardProps): ReactElement {
       </CardBody>
       <CardFooter>
         <ButtonGroup spacing="2">
-          <NextLink href={`/game/${id}`} passHref>
+          <NextLink href={`/post/${id}`} passHref>
             <Button as="a" variant="solid" colorScheme="blue">
               Start
-            </Button>
-          </NextLink>
-
-          <NextLink href={`/post/${id}`} passHref>
-            <Button as="a" variant="ghost" colorScheme="blue">
-              Result
             </Button>
           </NextLink>
         </ButtonGroup>

@@ -19,7 +19,6 @@ export interface PlayerProps {
 export function Player(props: PlayerProps): ReactElement {
   const { url, playing } = props;
   const playerRef = createRef<any>();
-  const [replayCount, setReplayCount] = useState(0);
   
   // FIXME
   // use regex to parse query string from url
@@ -36,7 +35,6 @@ export function Player(props: PlayerProps): ReactElement {
         <ReactPlayer
           width="100%"
           height="100%"
-          key={replayCount}
           ref={playerRef as any}
           playing={playing}
           url={url}
