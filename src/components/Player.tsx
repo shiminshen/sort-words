@@ -18,6 +18,8 @@ export interface PlayerProps {
   
 export function Player(props: PlayerProps): ReactElement {
   const { url, playing } = props;
+  // FIXME workaround autoplay at first render
+  const [playCount, setPlayCount] = useState(0);
   const playerRef = createRef<any>();
   
   // FIXME
@@ -26,6 +28,7 @@ export function Player(props: PlayerProps): ReactElement {
   const urlParams = qs.parse(queryString);
   const replay = () => {
     // seek player to beginning
+    setPlayCount(playCount + 1);
     playerRef?.current?.seekTo(urlParams?.start || urlParams?.t || 0);
   }
 
@@ -36,7 +39,7 @@ export function Player(props: PlayerProps): ReactElement {
           width="100%"
           height="100%"
           ref={playerRef as any}
-          playing={playing}
+          playing={!!playCount}
           url={url}
           config={{
             playerVars: {
