@@ -106,6 +106,7 @@ export function Question(props: QuestionProps): ReactElement {
         containerClassName="w-full bg-slate-400 flex flex-wrap"
         onChange={handleAnswer}
         items={{
+          answers: [],
           choices: shuffleArray(choiceItems),
         }}
         columns={2}
