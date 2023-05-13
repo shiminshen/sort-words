@@ -41,7 +41,7 @@ export function Game(props: GameProps): ReactElement {
   const question = questions?.[questionIndex];
   const toast = useToast();
 
-  if (!questions || !question) {
+  if (!questions) {
     return <></>;
   }
 
