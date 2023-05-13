@@ -3,9 +3,13 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { ReactElement } from "react";
+import NextLink from "next/link";
+import { Button } from "@chakra-ui/react";
+
 import Question from "@/components/Question";
 import { useToast } from "@chakra-ui/react";
-import { fetchGame } from '@/api/game'
+import { fetchGame } from "@/api/game";
+import { Box } from "@chakra-ui/react";
 
 import { GameSettingsProvider } from "@/components/useGameSettings";
 
@@ -13,19 +17,31 @@ export interface GameProps {
   id: string;
 }
 
+// complete page with return to home button
+const CompletePage = () => {
+  return (
+    <Box>
+      <h1>Game Complete</h1>
+      <NextLink href="/">
+        <Button as="a">Return to Home</Button>
+      </NextLink>
+    </Box>
+  );
+};
+
 export function Game(props: GameProps): ReactElement {
   const { isLoading, error, data } = useQuery({
-    queryKey: ['game', props.id],
+    queryKey: ["game", props.id],
     queryFn: () => fetchGame(props.id),
-  })
-    console.log(data)
+  });
+  console.log(data);
   const [questionIndex, setQuestionIndex] = useState(0);
-  const questions = data?.questions
-  const question = questions?.[questionIndex]
+  const questions = data?.questions;
+  const question = questions?.[questionIndex];
   const toast = useToast();
 
   if (!question) {
-    return <></>
+    return <></>;
   }
 
   // const [showNextButton, setShowNextButton] = useState(false);
@@ -60,11 +76,15 @@ export function Game(props: GameProps): ReactElement {
 
   return (
     <GameSettingsProvider>
-      <Question
-        key={questionIndex}
-        data={question}
-        handleAnswer={handleAnswer}
-      />
+      {questionIndex === questions.length ? (
+        <CompletePage />
+      ) : (
+        <Question
+          key={questionIndex}
+          data={question}
+          handleAnswer={handleAnswer}
+        />
+      )}
     </GameSettingsProvider>
   );
 }

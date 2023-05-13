@@ -30,6 +30,11 @@ export const questions = [
     description: "你可以在面對困難、挑戰或複雜的情況時使用這句話，表達你對其難度的感受或提醒其他人事情的困難程度。例如，當某人問你是否可以完成一個困難的任務時，你可以回答「むずかしいよ」來表達你認為這很難。"
   },
   {
+    url: "https://youtu.be/jhCRo5_2X6M?start=285&end=290",
+    answers: ["だ", "か", "ら", "ど", "う", "し", "た"],
+    description: "意思是「那又怎樣？」，表示對某事的不在意或不在乎。這句話可以用於回應他人的觀點、挑釁或輕描淡寫一件事情的重要性。它是一種非正式的口語表達方式，適用於日常對話中。"
+  },
+  {
     url: "https://youtu.be/tknn02o0B5o?start=89&end=92",
     answers: ["う", "ま", "い"],
     description: "你可以在品嚐美食時使用這個詞來表達你對食物的讚美，或者在看到某人展示出優秀的技能時使用這個詞來表示欣賞和讚賞。例如，當你吃了一口美味的料理時，你可以說「うまい！」來表達你的讚美之情。"
@@ -64,6 +69,6 @@ export const gameData = [
     language: "Japanese",
     type: "Listening",
     level: 1,
-    questions: questions.slice(3, 6),
+    questions: questions.slice(3, 7),
   }
 ]

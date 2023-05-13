@@ -32,18 +32,17 @@ export function Post(props: GameProps): ReactElement {
   // const [showNextButton, setShowNextButton] = useState(false);
 
   return (
-    <Box w={500} mx="auto" pb={30}>
+    <Box w={{ sm: 'full', md: '500px' }} mx="auto" pb={30}>
       {questions.map((question, index) => (
         <Box key={index} mb={3}>
-          <Box>{index + 1}</Box>
-          <Box>
+          <Box as='b' fontSize={'2xl'}>{index + 1}. {question.answers.join("")}</Box>
+          <Box w={{ sm: 'full', md: '500' }}>
             <Player
               url={question.url}
               answers={question.answers}
               playing
             />
             </Box>
-          <Box as='b' fontSize={'2xl'}>{question.answers.join("")}</Box>
           <Box>{question.description}</Box>
         </Box>
       ))}

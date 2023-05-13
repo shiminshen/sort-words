@@ -34,7 +34,7 @@ export function Player(props: PlayerProps): ReactElement {
 
   return (
     <>
-      <div className="w-full m-h-50 aspect-video">
+      <div className="w-full aspect-video">
         <ReactPlayer
           width="100%"
           height="100%"
