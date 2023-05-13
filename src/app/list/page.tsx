@@ -5,8 +5,6 @@ import { GameList } from "@/components/GameList";
 
 export default function Home() {
   return (
-    <main className="pt-20 flex h-screen flex-col items-center p-6">
-      <GameList />
-    </main>
+    <GameList />
   );
 }

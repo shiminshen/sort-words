@@ -7,7 +7,7 @@ import Question from "@/components/Question";
 import { Box, useToast } from "@chakra-ui/react";
 import { fetchGame } from "@/api/game";
 import Player from "@/components/Player";
-import NextLink from 'next/link'
+import NextLink from "next/link";
 import { Button } from "@chakra-ui/react";
 
 export interface GameProps {
@@ -32,26 +32,30 @@ export function Post(props: GameProps): ReactElement {
   // const [showNextButton, setShowNextButton] = useState(false);
 
   return (
-    <Box w={{ sm: 'full', md: '500px' }} mx="auto" pb={30}>
+    <Box w={["full", "500px"]} mx="auto" pb={30}>
       {questions.map((question, index) => (
         <Box key={index} mb={3}>
-          <Box as='b' fontSize={'2xl'}>{index + 1}. {question.answers.join("")}</Box>
-          <Box w={{ sm: 'full', md: '500' }}>
-            <Player
-              url={question.url}
-              answers={question.answers}
-              playing
-            />
-            </Box>
+          <Box as="b" fontSize={"2xl"}>
+            {index + 1}. {question.answers.join("")}
+          </Box>
+          <Box w={["full", "500px"]}>
+            <Player url={question.url} answers={question.answers} playing />
+          </Box>
           <Box>{question.description}</Box>
         </Box>
       ))}
-      <Box w={'full'} pos='fixed' bottom={0}>
-          <NextLink href={`/game/${id}`} passHref>
-            <Button as="a"  variant="solid" colorScheme="blue">
-              Test Start
-            </Button>
-          </NextLink>
+      <Box pos="fixed" bottom={0}>
+        <NextLink className={"w-full"} href={`/game/${id}`} passHref>
+          <Button
+            mb={2}
+            w={["80vw", "450px"]}
+            as="a"
+            variant="solid"
+            colorScheme="blue"
+          >
+            Test Start
+          </Button>
+        </NextLink>
       </Box>
     </Box>
   );

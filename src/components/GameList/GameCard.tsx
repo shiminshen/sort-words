@@ -23,7 +23,7 @@ export interface GameCardProps {
 export function GameCard(props: GameCardProps): ReactElement {
   const { id, title, language, type } = props;
   return (
-    <Card mr={2}>
+    <Card mt={2}  w={['full', 500]}>
       <CardHeader>
         <Text>{title}</Text>
       </CardHeader>
@@ -32,9 +32,9 @@ export function GameCard(props: GameCardProps): ReactElement {
         <Text>{type}</Text>
       </CardBody>
       <CardFooter>
-        <ButtonGroup spacing="2">
-          <NextLink href={`/post/${id}`} passHref>
-            <Button as="a" variant="solid" colorScheme="blue">
+        <ButtonGroup w={'100%'} spacing="2" >
+          <NextLink className={'w-full'} href={`/post/${id}`} passHref>
+            <Button w={'100%'} as="a" variant="solid" colorScheme="blue">
               Start
             </Button>
           </NextLink>

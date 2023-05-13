@@ -11,7 +11,7 @@ export interface indexProps {
 
 export function GameList(props: indexProps): ReactElement {
   return (
-    <Flex>
+    <Flex w={['full', 'auto']} direction={'column'}>
       {gameData.map((game) => (
         <GameCard
           key={game.title}

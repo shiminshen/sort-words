@@ -30,17 +30,18 @@ const CompletePage = () => {
 };
 
 export function Game(props: GameProps): ReactElement {
+  const { id } = props;
   const { isLoading, error, data } = useQuery({
-    queryKey: ["game", props.id],
-    queryFn: () => fetchGame(props.id),
+    queryKey: ["game", id],
+    queryFn: () => fetchGame(id),
   });
-  console.log(data);
+    
   const [questionIndex, setQuestionIndex] = useState(0);
   const questions = data?.questions;
   const question = questions?.[questionIndex];
   const toast = useToast();
 
-  if (!question) {
+  if (!questions || !question) {
     return <></>;
   }
 
@@ -49,7 +50,7 @@ export function Game(props: GameProps): ReactElement {
     const { choices } = items;
 
     const currentAnswer = choices.map((I: any) => I.content).join("");
-    const correctAnswer = question.answers.join("");
+    const correctAnswer = question?.answers.join("");
 
     if (currentAnswer === correctAnswer) {
       toast({
@@ -73,6 +74,7 @@ export function Game(props: GameProps): ReactElement {
       // });
     }
   };
+  
 
   return (
     <GameSettingsProvider>

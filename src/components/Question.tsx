@@ -25,7 +25,7 @@ const MultipleContainers = dynamic(
 
 export interface QuestionProps {
   url?: string;
-  data: QuestionData
+  data?: QuestionData
   handleAnswer: (items: any) => void;
 }
   
@@ -45,7 +45,7 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 
 export function Question(props: QuestionProps): ReactElement {
-  const { data: { url, answers }, handleAnswer } = props;
+  const { data: { url, answers } = {}, handleAnswer } = props;
   const playerRef = createRef<any>();
   const [replayCount, setReplayCount] = useState(0);
   const { autoReplay } = useGameSettings();
@@ -62,6 +62,10 @@ export function Question(props: QuestionProps): ReactElement {
   const replay = () => {
     // seek player to beginning
     playerRef?.current?.seekTo(urlParams?.start || urlParams?.t || 0);
+  }
+
+  if (!url || !answers || !choiceItems) {
+    return <></>
   }
 
   return (
