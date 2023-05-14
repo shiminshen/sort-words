@@ -11,19 +11,20 @@ import NextLink from "next/link";
 import { Button } from "@chakra-ui/react";
 
 export interface GameProps {
-  id: string;
+  // id: string;
+  // id: string;
+  data: any
 }
 
 export function Post(props: GameProps): ReactElement {
-  const { id } = props;
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["game", id],
-    queryFn: () => fetchGame(id),
-  });
-  console.log(data);
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const { data } = props;
+  // const { isLoading, error, data } = useQuery({
+  //   queryKey: ["game", id],
+  //   queryFn: () => fetchGame(id),
+  // });
+    
+  const id = data?.id
   const questions = data?.questions;
-  const toast = useToast();
 
   if (!questions?.length) {
     return <></>;
@@ -33,7 +34,7 @@ export function Post(props: GameProps): ReactElement {
 
   return (
     <Box w={["full", "500px"]} mx="auto" pb={30}>
-      {questions.map((question, index) => (
+      {questions.map((question: any, index: number) => (
         <Box key={index} mb={3}>
           <Box as="b" fontSize={"2xl"}>
             {index + 1}. {question.answers.join("")}

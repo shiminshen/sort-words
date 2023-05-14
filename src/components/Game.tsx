@@ -14,7 +14,8 @@ import { Box } from "@chakra-ui/react";
 import { GameSettingsProvider } from "@/components/useGameSettings";
 
 export interface GameProps {
-  id: string;
+  // id: number;
+  data: any;
 }
 
 // complete page with return to home button
@@ -30,12 +31,12 @@ const CompletePage = () => {
 };
 
 export function Game(props: GameProps): ReactElement {
-  const { id } = props;
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["game", id],
-    queryFn: () => fetchGame(id),
-  });
-    
+  // const { isLoading, error, data } = useQuery({
+  //   queryKey: ["game", id],
+  //   queryFn: () => fetchGame(id),
+  // });
+  const { data } = props;
+
   const [questionIndex, setQuestionIndex] = useState(0);
   const questions = data?.questions;
   const question = questions?.[questionIndex];
@@ -74,7 +75,6 @@ export function Game(props: GameProps): ReactElement {
       // });
     }
   };
-  
 
   return (
     <GameSettingsProvider>

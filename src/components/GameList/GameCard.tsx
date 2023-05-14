@@ -14,7 +14,8 @@ import NextLink from "next/link";
 import type { ReactElement } from "react";
 
 export interface GameCardProps {
-  id: string;
+  // id: string;
+  id: number;
   title: string;
   language: string;
   type: string;

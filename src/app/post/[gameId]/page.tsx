@@ -1,4 +1,6 @@
 import { Post } from "@/components/Post";
+import { normalizeQuestions } from '@/utilities/cmsNormalizer';
+import { client } from "@/utilities/contentful";
 
 interface GamePageProps {
   params: {
@@ -6,8 +8,12 @@ interface GamePageProps {
   };
 }
 
-export default function GamePage({ params }: GamePageProps) {
+export default async function GamePage({ params }: GamePageProps) {
+  const entries = await client.getEntries();
+  const games = normalizeQuestions(entries.items)
+  const data = games[Number(params.gameId) - 1]
+  
   return (
-    <Post id={params.gameId}/>
+    <Post data={data} />
   );
 }
